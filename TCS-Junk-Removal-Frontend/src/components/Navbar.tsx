@@ -5,7 +5,6 @@ export default function NavBar() {
   return (
     <header className="fixed top-0 left-0 w-full h-[90px] bg-black shadow-md z-50">
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
-        {/* LEFT SIDE — Logo + Text */}
         <div className="flex items-center gap-3 sm:gap-4">
           <Logo className="w-[45px] h-[45px] sm:w-[60px] sm:h-[60px]" />
 
@@ -17,15 +16,14 @@ export default function NavBar() {
 
               text-[20px]      /* phones */
               sm:text-[28px]   /* tablets */
-              md:text-[34px]   /* small desktops */
-              lg:text-[40px]   /* big desktops */
+              md:text-[28px]   /* small desktops */
+              lg:text-[28px]   /* big desktops */
             "
           >
             TCS - Junk Removal
           </p>
         </div>
 
-        {/* RIGHT SIDE — Button */}
         <Link
           to="/book"
           className="

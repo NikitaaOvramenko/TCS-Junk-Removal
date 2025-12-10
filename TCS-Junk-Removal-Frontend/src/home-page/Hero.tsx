@@ -12,42 +12,59 @@ export default function Hero() {
   const tl = gsap.timeline({});
 
   useGSAP(() => {
-    gsap.set(truckRef.current, {
-      position: "absolute",
-      top: "40%",
-      left: "-10%",
-      width: 400,
-      height: "auto",
-    });
+    const mm = gsap.matchMedia();
 
-    gsap.set(trailerRef.current, {
-      position: "absolute",
-      top: "14%",
-      left: "15%",
-      width: 400,
-      height: 350,
-    });
+    mm.add(
+      { isMobile: "(max-width: 500px)", isDesktop: "(min-width: 501px" },
+      (context) => {
+        let { isMobile, isDesktop } = context.conditions;
+        gsap.set(truckRef.current, {
+          position: "absolute",
+          top: "40%",
+          left: "-10%",
+          width: isMobile ? 200 : 400,
+          height: "auto",
+        });
 
-    tl.to(truckRef.current, { x: 250, duration: 2, ease: "power1.inOut" }, 0)
-      .to(trailerRef.current, { x: 250, duration: 2, ease: "power1.inOut" }, 0)
-      .to(
-        "#Wheel",
-        {
+        gsap.set(trailerRef.current, {
+          position: "absolute",
+          top: isDesktop ? "14%" : "27%",
+          left: isDesktop ? "15%" : "25%",
+          width: isMobile ? 200 : 400,
+
+          height: isDesktop ? 350 : 180,
+        });
+
+        tl.to(
+          truckRef.current,
+          { x: isDesktop ? 250 : 50, duration: 2, ease: "power1.inOut" },
+          0
+        )
+          .to(
+            trailerRef.current,
+            { x: isDesktop ? 250 : 50, duration: 2, ease: "power1.inOut" },
+            0
+          )
+          .to(
+            "#Wheel",
+            {
+              transformOrigin: "50% 50%",
+              rotation: 360,
+              duration: 2,
+              ease: "power1.inOut",
+            },
+            0
+          );
+
+        tl.to("#trunk", {
+          duration: 3,
+          rotation: 45,
+          x: 50,
+          fill: "black",
           transformOrigin: "50% 50%",
-          rotation: 360,
-          duration: 2,
-          ease: "power1.inOut",
-        },
-        0
-      );
-
-    tl.to("#trunk", {
-      duration: 3,
-      rotation: 45,
-      x: 50,
-      fill: "black",
-      transformOrigin: "50% 50%",
-    });
+        });
+      }
+    );
   }, []);
 
   return (
@@ -75,7 +92,7 @@ export default function Hero() {
 
         <img
           src={GarbageTower}
-          className="absolute w-auto h-full -right-[250px] lg:right-0 lg:scale-150"
+          className="absolute w-auto h-full -right-[60%] rotate-y-180 lg:rotate-y-0 lg:right-0 lg:scale-150"
         />
       </div>
 
