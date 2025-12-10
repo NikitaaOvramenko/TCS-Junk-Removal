@@ -17,7 +17,7 @@ export default function Hero() {
     mm.add(
       { isMobile: "(max-width: 500px)", isDesktop: "(min-width: 501px" },
       (context) => {
-        let { isMobile, isDesktop } = context.conditions;
+        const { isMobile, isDesktop } = context.conditions || {};
         gsap.set(truckRef.current, {
           position: "absolute",
           top: "40%",
