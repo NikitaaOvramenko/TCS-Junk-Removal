@@ -8,8 +8,6 @@ import { useRef } from "react";
 export default function Hero() {
   const headerRef = useRef<HTMLParagraphElement>(null);
 
-  const tl = gsap.timeline({});
-
   useGSAP(() => {
     gsap.from(headerRef.current, {
       y: "-20%",
