@@ -1,117 +1,94 @@
 import Section from "../components/Section";
-import Truck from "../assets/truck.svg?react";
-import Trailer from "../assets/trailer2.svg?react";
-import GarbageTower from "../assets/images/garbage-tower.png";
+import HeroBackground from "../assets/images/Hero-Images/hero-bg.png";
+import Ram from "../assets/images/Hero-Images/ram.svg?react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 
 export default function Hero() {
-  const truckRef = useRef<SVGSVGElement>(null);
-  const trailerRef = useRef<SVGSVGElement>(null);
+  const headerRef = useRef<HTMLParagraphElement>(null);
+
   const tl = gsap.timeline({});
 
   useGSAP(() => {
-    const mm = gsap.matchMedia();
-
-    mm.add(
-      { isMobile: "(max-width: 500px)", isDesktop: "(min-width: 501px" },
-      (context) => {
-        const { isMobile, isDesktop } = context.conditions || {};
-        gsap.set(truckRef.current, {
-          position: "absolute",
-          top: "40%",
-          left: "-10%",
-          width: isMobile ? 200 : 400,
-          height: "auto",
-        });
-
-        gsap.set(trailerRef.current, {
-          position: "absolute",
-          top: isDesktop ? "14%" : "27%",
-          left: isDesktop ? "15%" : "25%",
-          width: isMobile ? 200 : 400,
-
-          height: isDesktop ? 350 : 180,
-        });
-
-        tl.to(
-          truckRef.current,
-          { x: isDesktop ? 250 : 50, duration: 2, ease: "power1.inOut" },
-          0
-        )
-          .to(
-            trailerRef.current,
-            { x: isDesktop ? 250 : 50, duration: 2, ease: "power1.inOut" },
-            0
-          )
-          .to(
-            "#Wheel",
-            {
-              transformOrigin: "50% 50%",
-              rotation: 360,
-              duration: 2,
-              ease: "power1.inOut",
-            },
-            0
-          );
-
-        tl.to("#trunk", {
-          duration: 3,
-          rotation: 45,
-          x: 50,
-          fill: "black",
-          transformOrigin: "50% 50%",
-        });
-      }
-    );
+    gsap.from(headerRef.current, {
+      y: "-20%",
+      opacity: "0",
+      duration: 1,
+      ease: "back.out",
+    });
   }, []);
 
   return (
-    <Section className="flex flex-col gap-3 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80%">
-      {/* PART 1 — Title */}
-      <div className="part1 flex w-full h-3/12 justify-center items-end px-4 text-center">
-        <p
-          className="
-            font-bold 
+    <Section className=" Hero relative flex flex-col gap-3 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80%">
+      {/* Background-stuff */}
+      <img
+        src={HeroBackground}
+        className=" absolute object-cover pointer-events-none z-0 opacity-60 w-full h-full "
+        alt=""
+      />
+
+      <div className="filter absolute w-full h-full bg-black opacity-70"></div>
+
+      {/* Content-stuff */}
+
+      <div className="content relative z-20 flex flex-col gap-10 w-full h-full">
+        <div className="part1 flex w-full h-3/12 justify-center items-end px-4 text-center">
+          <p
+            className="
+            font-extrabold 
             text-white 
             leading-tight
             text-[36px]
             sm:text-[50px]
             md:text-[65px]
-            lg:text-[80px]
+            lg:text-[50px]
+            font-LemonMilk
+            
           "
-        >
-          Junk Removal In <span className="text-[#8CF152]">Toronto & GTA</span>
-        </p>
-      </div>
+            ref={headerRef}
+          >
+            Junk Removal In{" "}
+            <span className="bg-gradient-to-r from-[#C5FFEC] to-[#00FF00] bg-clip-text text-transparent">
+              Toronto & GTA
+            </span>
+          </p>
+        </div>
 
-      <div className="part2 relative w-full h-6/12 flex items-center overflow-hidden">
-        <Truck ref={truckRef} />
-        <Trailer ref={trailerRef} />
+        <div className="part2 relative w-full flex flex-col-reverse lg:flex-row items-center justify-center gap-8 px-6 lg:px-16">
+          {/* LEFT — TEXT */}
+          <div className="left w-full lg:w-1/2 text-white">
+            <p className="  text-[clamp(1rem,2.2vw,1.6rem)]  leading-[180%]">
+              We make getting rid of unwanted items fast and stress-free. From
+              old furniture to household clutter, our team handles all the
+              lifting and disposal for you. Serving Toronto & the GTA with
+              same-day service and fair, upfront pricing. Clear your space the
+              easy way — book your removal today.
+            </p>
+          </div>
 
-        <img
-          src={GarbageTower}
-          className="absolute w-auto h-full -right-[60%] rotate-y-180 lg:rotate-y-0 lg:right-0 lg:scale-150"
-        />
-      </div>
+          {/* RIGHT — IMAGE */}
+          <div className="right w-full lg:w-1/2 flex items-center justify-center">
+            <Ram className="w-[50%] sm:w-[220px] lg:w-[80%] h-auto" />
+          </div>
+        </div>
 
-      {/* PART 3 — Buttons */}
-      <div
-        className="
+        {/* PART 3 — Buttons */}
+        <div
+          className="
           part3 
           flex 
           flex-col sm:flex-row
           items-center 
           justify-center 
-          gap-5 
+          gap-12
           h-3/12 
           w-full 
           pb-8
         "
-      >
-        <button
-          className="
+        >
+          <button
+            className="
             bg-[#16C834]
             text-white 
             font-bold 
@@ -125,12 +102,12 @@ export default function Hero() {
             hover:shadow-[0_4px_0_#0C8A23]
             transition-all
           "
-        >
-          Book Removal
-        </button>
+          >
+            Book Removal
+          </button>
 
-        <button
-          className="
+          <button
+            className="
             text-white/90
             font-bold 
             rounded-xl
@@ -145,9 +122,10 @@ export default function Hero() {
             hover:shadow-[0_4px_0_rgba(0,0,0,0.15)]
             transition-all
           "
-        >
-          View Services
-        </button>
+          >
+            View Services
+          </button>
+        </div>
       </div>
     </Section>
   );

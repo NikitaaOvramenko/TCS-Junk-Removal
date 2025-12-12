@@ -1,26 +1,27 @@
 import { Link } from "react-router-dom";
-import Logo from "../assets/Untitled.svg?react";
+import Logo from "../assets/Modified_Logo.svg?react";
 
 export default function NavBar() {
   return (
-    <header className="fixed top-0 left-0 w-full h-[90px] bg-black shadow-md z-50">
+    <header className="fixed top-0 left-0 w-full h-[90px] bg-white shadow-md z-50">
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center gap-3 sm:gap-4">
           <Logo className="w-[45px] h-[45px] sm:w-[60px] sm:h-[60px]" />
 
           <p
             className="
-              text-white 
-              font-semibold 
+              text-black 
+              font-regular
               leading-none
+              tracking-[9%]
 
-              text-[20px]      /* phones */
-              sm:text-[28px]   /* tablets */
-              md:text-[28px]   /* small desktops */
-              lg:text-[28px]   /* big desktops */
+              
+
+            text-[clamp(0.85rem,2.2vw,1.2rem)]
+              
             "
           >
-            TCS - Junk Removal
+            YourLocalJunkRemoval
           </p>
         </div>
 
@@ -30,7 +31,7 @@ export default function NavBar() {
             bg-green-500 
             hover:bg-green-600 
             transition 
-            text-black 
+            text-white
             font-semibold 
             rounded-lg 
             text-center 
