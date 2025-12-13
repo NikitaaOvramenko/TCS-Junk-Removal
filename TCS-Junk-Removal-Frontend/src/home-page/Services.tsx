@@ -20,8 +20,8 @@ export default function Services() {
         scrollTrigger: {
           trigger: el,
           start: "top bottom",
-          end: "bottom 70%",
-          scrub: true,
+          end: "bottom bottom",
+          scrub: 0.3,
         },
         x: id % 2 === 0 ? -100 : 100,
         opacity: 0,
