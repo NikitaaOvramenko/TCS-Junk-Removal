@@ -50,7 +50,7 @@ export default function Services() {
   ];
 
   return (
-    <Section className=" services flex flex-col gap-8 justify-evenly items-center mt-4  overflow-x-clip ">
+    <Section className="  services flex flex-col gap-8 justify-evenly items-center mt-4  overflow-x-clip ">
       <h1 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] from-18 to-[#51D488] to-45% bg-clip-text text-transparent">
         Our Services
       </h1>

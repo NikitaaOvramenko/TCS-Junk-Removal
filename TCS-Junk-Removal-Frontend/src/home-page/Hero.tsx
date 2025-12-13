@@ -4,10 +4,12 @@ import Ram from "../assets/images/Home-Images/ram.svg?react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
+import { ScrollTrigger } from "gsap/all";
 
 export default function Hero() {
   const headerRef = useRef<HTMLParagraphElement>(null);
 
+  gsap.registerPlugin(ScrollTrigger);
   useGSAP(() => {
     gsap.from(headerRef.current, {
       y: "-20%",
@@ -15,14 +17,23 @@ export default function Hero() {
       duration: 1,
       ease: "back.out",
     });
+
+    gsap.to(".heroBg", {
+      scrollTrigger: {
+        start: "top top",
+        end: "bottom top ",
+        scrub: true,
+      },
+      y: 500,
+    });
   }, []);
 
   return (
-    <Section className=" Hero relative flex flex-col gap-3 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80%">
+    <Section className=" Hero relative flex flex-col gap-3 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80% overflow-hidden">
       {/* Background-stuff */}
       <img
         src={HeroBackground}
-        className=" absolute object-cover pointer-events-none z-0 opacity-60 w-full h-full "
+        className=" heroBg absolute object-cover pointer-events-none z-0 opacity-60 w-full h-full "
         alt=""
       />
 
@@ -37,7 +48,7 @@ export default function Hero() {
             font-extrabold 
             text-white 
             leading-tight
-            text-[clamp(1rem,6vw,60px)]
+            text-[clamp(2rem,6vw,60px)]
             font-LemonMilk
             
           "
@@ -53,7 +64,7 @@ export default function Hero() {
         <div className="part2 relative w-full flex flex-col-reverse lg:flex-row items-center justify-center gap-8 px-6 lg:px-16">
           {/* LEFT — TEXT */}
           <div className="left w-full lg:w-1/2 text-white">
-            <p className="  text-[clamp(1rem,2.2vw,1.6rem)]  leading-[180%]">
+            <p className="  text-[clamp(0.85rem,2.2vw,1.6rem)]  leading-[180%]">
               We make getting rid of unwanted items fast and stress-free. From
               old furniture to household clutter, our team handles all the
               lifting and disposal for you. Serving Toronto & the GTA with
