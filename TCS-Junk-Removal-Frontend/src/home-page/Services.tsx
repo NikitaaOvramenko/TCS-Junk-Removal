@@ -15,24 +15,17 @@ export default function Services() {
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
-    gsap.utils.toArray<HTMLElement>(".service").forEach((el, id: number) => {
+    gsap.utils.toArray<HTMLElement>(".service").forEach((el, id) => {
       gsap.from(el, {
         scrollTrigger: {
           trigger: el,
           start: "top bottom",
-          end: "bottom center",
-
+          end: "bottom 70%",
           scrub: true,
         },
-        x: () => {
-          if (id % 2 == 0) {
-            return -100;
-          } else {
-            return 100;
-          }
-        },
+        x: id % 2 === 0 ? -100 : 100,
         opacity: 0,
-        duration: 1,
+        ease: "none",
       });
     });
   });
@@ -57,18 +50,21 @@ export default function Services() {
   ];
 
   return (
-    <Section className=" services flex flex-col gap-8 justify-evenly items-center mt-4">
+    <Section className=" services flex flex-col gap-8 justify-evenly items-center mt-4  overflow-x-clip ">
       <h1 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] from-18 to-[#51D488] to-45% bg-clip-text text-transparent">
         Our Services
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 ">
         {services.map((service, id) => (
           <div
             id={`${id}`}
             className={` service ${id} flex items-end justify-center`}
           >
-            <div className="box drop-shadow-2xl flex justify-center items-center relative w-[400px] h-[200px] lg:w-[548px] lg:h-[271px] rounded-xl bg-[#14BD24]">
+            <div
+              className="box drop-shadow-2xl flex justify-center items-center relative w-[90vw] max-w-[400px]
+ h-[200px] lg:w-[548px] lg:h-[271px] rounded-xl bg-[#14BD24]"
+            >
               <img
                 className="absolute opacity-90  pointer-events-none object-cover rounded-xl w-full h-full"
                 src={service.bg}
