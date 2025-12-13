@@ -15,7 +15,7 @@ export default function Services() {
   gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(() => {
-    gsap.utils.toArray(".service").forEach((el, id: number) => {
+    gsap.utils.toArray<HTMLElement>(".service").forEach((el, id: number) => {
       gsap.from(el, {
         scrollTrigger: {
           trigger: el,
