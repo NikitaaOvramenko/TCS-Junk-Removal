@@ -3,12 +3,41 @@ import FurnitureRemovalIcon from "../assets/images/Home-Images/furniture-removal
 import PropertyCleanoutsIcon from "../assets/images/Home-Images/property-cleanouts.svg?react";
 import ApplianceRemovalIcon from "../assets/images/Home-Images/appliance-removal.svg?react";
 import WasteRemovalIcon from "../assets/images/Home-Images/waste-removal.svg?react";
-
 import FurnitureRemovalBg from "../assets/images/Home-Images/furniture-removal-bg.png";
 import PropertyCleanoutBg from "../assets/images/Home-Images/property-cleanouts-bg.png";
 import ApplianceRemovalBg from "../assets/images/Home-Images/appliance-removal-bg.png";
 import WasteRemovalBg from "../assets/images/Home-Images/waste-removal-bg.png";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+
 export default function Services() {
+  const tl = gsap.timeline({});
+  gsap.registerPlugin(ScrollTrigger);
+
+  useGSAP(() => {
+    gsap.utils.toArray(".service").forEach((el, id: number) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom center",
+
+          scrub: true,
+        },
+        x: () => {
+          if (id % 2 == 0) {
+            return -100;
+          } else {
+            return 100;
+          }
+        },
+        opacity: 0,
+        duration: 1,
+      });
+    });
+  });
+
   const services = [
     {
       name: "Furniture Removal",
@@ -29,14 +58,17 @@ export default function Services() {
   ];
 
   return (
-    <Section className="  flex flex-col gap-8 justify-evenly items-center mt-4">
+    <Section className=" services flex flex-col gap-8 justify-evenly items-center mt-4">
       <h1 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] from-18 to-[#51D488] to-45% bg-clip-text text-transparent">
         Our Services
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-        {services.map((service) => (
-          <div id={service.name} className="flex items-end justify-center">
+        {services.map((service, id) => (
+          <div
+            id={`${id}`}
+            className={` service ${id} flex items-end justify-center`}
+          >
             <div className="box drop-shadow-2xl flex justify-center items-center relative w-[400px] h-[200px] lg:w-[548px] lg:h-[271px] rounded-xl bg-[#14BD24]">
               <img
                 className="absolute opacity-90  pointer-events-none object-cover rounded-xl w-full h-full"
