@@ -39,7 +39,7 @@ export default function Services() {
           <div id={service.name} className="flex items-end justify-center">
             <div className="box drop-shadow-2xl flex justify-center items-center relative w-[400px] h-[200px] lg:w-[548px] lg:h-[271px] rounded-xl bg-[#14BD24]">
               <img
-                className="absolute opacity-90 object-cover rounded-xl w-full h-full"
+                className="absolute opacity-90  pointer-events-none object-cover rounded-xl w-full h-full"
                 src={service.bg}
                 alt=""
               />
