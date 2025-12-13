@@ -1,6 +1,6 @@
 import Section from "../components/Section";
-import HeroBackground from "../assets/images/Hero-Images/hero-bg.png";
-import Ram from "../assets/images/Hero-Images/ram.svg?react";
+import HeroBackground from "../assets/images/Home-Images/hero-bg.png";
+import Ram from "../assets/images/Home-Images/ram.svg?react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
@@ -37,10 +37,7 @@ export default function Hero() {
             font-extrabold 
             text-white 
             leading-tight
-            text-[36px]
-            sm:text-[50px]
-            md:text-[65px]
-            lg:text-[50px]
+            text-[clamp(1rem,6vw,60px)]
             font-LemonMilk
             
           "
