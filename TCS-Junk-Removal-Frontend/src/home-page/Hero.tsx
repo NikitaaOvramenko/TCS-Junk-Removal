@@ -1,6 +1,8 @@
 import Section from "../components/Section";
 import HeroBackground from "../assets/images/Home-Images/hero-bg.png";
 import Ram from "../assets/images/Home-Images/ram.svg?react";
+import TruckTrailer from "../assets/images/Home-Images/truckTrailer.svg?react";
+import TruckTrailer2 from "../assets/images/Home-Images/truck_trailer.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
@@ -48,7 +50,7 @@ export default function Hero() {
             font-extrabold 
             text-white 
             leading-tight
-            text-[clamp(2rem,6vw,60px)]
+            text-[clamp(2rem,6vw,4rem)]
             font-LemonMilk
             
           "
@@ -64,7 +66,7 @@ export default function Hero() {
         <div className="part2 relative w-full flex flex-col-reverse lg:flex-row items-center justify-center gap-8 px-6 lg:px-16">
           {/* LEFT — TEXT */}
           <div className="left w-full lg:w-1/2 text-white">
-            <p className="  text-[clamp(0.85rem,2.2vw,1.6rem)]  leading-[180%]">
+            <p className="  text-[clamp(0.85rem,1.5vw,2rem)]  leading-[180%]">
               We make getting rid of unwanted items fast and stress-free. From
               old furniture to household clutter, our team handles all the
               lifting and disposal for you. Serving Toronto & the GTA with
@@ -75,7 +77,12 @@ export default function Hero() {
 
           {/* RIGHT — IMAGE */}
           <div className="right w-full lg:w-1/2 flex items-center justify-center">
-            <Ram className="w-[50%] sm:w-[220px] lg:w-[80%] h-auto" />
+            {/* <TruckTrailer className="w-[clamp(20rem,10vw,1000px)] h-[300px]" /> */}
+            <img
+              src={TruckTrailer2}
+              className="w-[clamp(20rem,50vw,40rem)] h-auto object-contain"
+              alt=""
+            />
           </div>
         </div>
 
