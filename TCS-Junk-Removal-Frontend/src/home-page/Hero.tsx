@@ -1,7 +1,5 @@
 import Section from "../components/Section";
 import HeroBackground from "../assets/images/Home-Images/hero-bg.png";
-import Ram from "../assets/images/Home-Images/ram.svg?react";
-import TruckTrailer from "../assets/images/Home-Images/truckTrailer.svg?react";
 import TruckTrailer2 from "../assets/images/Home-Images/truck_trailer.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
