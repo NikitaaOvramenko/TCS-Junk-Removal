@@ -7,10 +7,7 @@ interface Props {
 
 export default function Section({ children, className }: Props) {
   return (
-    <div
-      className={`w-full  h-[clamp(600px,90vh,1024px)]
- lg:h-dvh ${className ?? ""}`}
-    >
+    <div className={`w-full  h-[1024px] lg:h-dvh ${className ?? ""}`}>
       {children}
     </div>
   );
