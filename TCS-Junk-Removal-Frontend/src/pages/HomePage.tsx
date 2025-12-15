@@ -4,10 +4,13 @@ import Services from "../home-page/Services";
 import WhyUs from "../home-page/WhyUs";
 export default function HomePage() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col ">
       <Gap height={90}></Gap>
-      <Hero></Hero>
-      <Services></Services>
+      <div className="content flex flex-col">
+        <Hero></Hero>
+        <Services></Services>
+      </div>
+
       <WhyUs></WhyUs>
     </main>
   );

@@ -1,7 +1,7 @@
 interface props {
-  height?: number;
+  height?: string | number;
 }
 
-export default function gap({ height }: props) {
-  return <div style={{ height: height }}></div>;
+export default function Gap({ height }: props) {
+  return <div className={`${height}`} style={{ height: height }}></div>;
 }
