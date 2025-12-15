@@ -6,12 +6,11 @@ export default function HomePage() {
   return (
     <main className="flex flex-col ">
       <Gap height={90}></Gap>
-      <div className="content flex flex-col">
+      <div className="content flex flex-col gap-8">
         <Hero></Hero>
         <Services></Services>
+        <WhyUs></WhyUs>
       </div>
-
-      <WhyUs></WhyUs>
     </main>
   );
 }

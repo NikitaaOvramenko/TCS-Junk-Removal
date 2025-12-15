@@ -50,13 +50,13 @@ export default function Services() {
   ];
 
   return (
-    <Section className="  services flex flex-col justify-center gap-4 overflow-x-clip ">
-      <div className="part1 flex justify-center items-center h-1/6">
+    <Section className="  services flex flex-col justify-center gap-8 overflow-x-clip ">
+      <div className="part1 flex justify-center items-center h-[10%]">
         <h1 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] from-18 to-[#51D488] to-45% bg-clip-text text-transparent">
           Our Services
         </h1>
       </div>
-      <div className="part2 flex flex-col justify-center h-4/6 w-full ">
+      <div className="part2 flex flex-col justify-center h-[85%] w-full ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 h-full">
           {services.map((service, id) => (
             <div
