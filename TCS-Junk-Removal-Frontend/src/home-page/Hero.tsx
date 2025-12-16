@@ -21,7 +21,7 @@ export default function Hero() {
     gsap.to(".heroBg", {
       scrollTrigger: {
         trigger: ".heroBg",
-        start: "top 90px",
+        start: "top top",
         end: "bottom top ",
         scrub: true,
       },
