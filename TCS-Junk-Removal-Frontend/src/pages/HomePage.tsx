@@ -6,7 +6,7 @@ import Reviews from "../home-page/Reviews";
 export default function HomePage() {
   return (
     <main className="flex flex-col ">
-      <Gap height={90}></Gap>
+      <Gap height={70}></Gap>
       <div className="content flex flex-col gap-8">
         <Hero></Hero>
         <Services></Services>
