@@ -29,7 +29,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <Section className=" Hero relative flex flex-col gap-3 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80% overflow-hidden">
+    <Section className=" Hero relative flex flex-col gap-12 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80% overflow-hidden">
       {/* Background-stuff */}
       <img
         src={HeroBackground}
