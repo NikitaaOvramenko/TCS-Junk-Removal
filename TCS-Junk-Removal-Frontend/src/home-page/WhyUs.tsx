@@ -43,7 +43,7 @@ export default function WhyUs() {
           trigger: ".whyUs",
           start: "top bottom",
           end: "bottom top",
-          scrub: true,
+          scrub: 0.3,
         },
       }
     );
