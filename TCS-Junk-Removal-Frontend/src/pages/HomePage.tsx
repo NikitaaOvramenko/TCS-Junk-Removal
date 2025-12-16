@@ -2,6 +2,7 @@ import Hero from "../home-page/Hero";
 import Gap from "../components/Gap";
 import Services from "../home-page/Services";
 import WhyUs from "../home-page/WhyUs";
+import Reviews from "../home-page/Reviews";
 export default function HomePage() {
   return (
     <main className="flex flex-col ">
@@ -10,6 +11,7 @@ export default function HomePage() {
         <Hero></Hero>
         <Services></Services>
         <WhyUs></WhyUs>
+        <Reviews></Reviews>
       </div>
     </main>
   );
