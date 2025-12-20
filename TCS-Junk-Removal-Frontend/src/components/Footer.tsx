@@ -1,3 +1,5 @@
+import BookButton from "./BookButton";
+
 export default function Footer() {
   return (
     <footer className="bg-black text-white px-6 py-10">
@@ -24,9 +26,8 @@ export default function Footer() {
 
         {/* CTA */}
         <div className="flex flex-col items-center gap-3">
-          <button className="mt-2 w-fit self-center bg-[#16C834] text-white font-bold rounded-xl px-6 py-3 shadow-[0_6px_0_#0C8A23] hover:translate-y-[2px] hover:shadow-[0_4px_0_#0C8A23] transition-all">
-            Book Removal
-          </button>
+          <BookButton className="mt-2 w-fit self-center bg-[#16C834] text-white font-bold rounded-xl px-6 py-3 shadow-[0_6px_0_#0C8A23] hover:translate-y-[2px] hover:shadow-[0_4px_0_#0C8A23] transition-all"></BookButton>
+
           <p className="text-xs text-gray-500">Fast • Affordable • Reliable</p>
         </div>
 

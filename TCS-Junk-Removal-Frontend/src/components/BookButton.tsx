@@ -7,7 +7,7 @@ interface Props {
 export default function BookButton({ className }: Props) {
   return (
     <Link to={"/book"} className={className}>
-      Book Removal
+      <p>Book Removal</p>
     </Link>
   );
 }

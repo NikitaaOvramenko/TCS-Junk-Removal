@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import bgPic from "../assets/images/Home-Images/bg-why-us-one.png";
+import BookButton from "../components/BookButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,9 +113,9 @@ export default function WhyUs() {
                     handle the heavy lifting so you don’t have to.
                   </p>
 
-                  <button className="mt-2 w-fit self-center bg-[#16C834] text-white font-bold rounded-xl px-6 py-3 shadow-[0_6px_0_#0C8A23] hover:translate-y-[2px] hover:shadow-[0_4px_0_#0C8A23] transition-all">
-                    Book Removal
-                  </button>
+                  {/* mt-2 w-fit self-center bg-[#16C834] text-white font-bold rounded-xl px-6 py-3 shadow-[0_6px_0_#0C8A23] hover:translate-y-[2px] hover:shadow-[0_4px_0_#0C8A23] transition-all */}
+
+                  <BookButton className="mt-2 w-fit self-center bg-[#16C834] text-white font-bold rounded-xl px-6 py-3 shadow-[0_6px_0_#0C8A23] hover:translate-y-[2px] hover:shadow-[0_4px_0_#0C8A23] transition-all"></BookButton>
                 </div>
               </div>
             </div>

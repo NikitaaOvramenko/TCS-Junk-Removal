@@ -121,6 +121,7 @@ export default function Hero() {
 
           <BookButton
             className="
+            text-center
             bg-[#16C834]
             text-white 
             font-bold 
