@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="flex items-center justify-center md:justify-start gap-3">
               <Logo className="w-12 h-12" />
               <p className="font-LemonMilk text-[clamp(1rem,2vw,1.25rem)] leading-none">
-                TCS Junk Removal
+                YourLocalJunkRemoval
               </p>
             </div>
             <p className="text-sm text-gray-300 leading-relaxed text-center md:text-left">

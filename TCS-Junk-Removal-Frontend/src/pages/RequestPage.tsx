@@ -4,6 +4,7 @@ import axios from "axios";
 import ContactFields from "../request-page/ContactFields";
 import LocationFields from "../request-page/LocationFields";
 import RequestDetails from "../request-page/RequestDetails";
+import { ScrollUp } from "../hook/ScrollHook";
 
 interface FormData {
   name: string;
@@ -30,6 +31,7 @@ interface FormData {
 }
 
 export default function RequestPage() {
+  ScrollUp();
   const [formData, setFormData] = useState<FormData>({
     name: "",
 
