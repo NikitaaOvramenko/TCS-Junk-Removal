@@ -1,19 +1,12 @@
 import Section from "../components/Section";
-import FurnitureRemovalIcon from "../assets/images/Home-Images/furniture-removal.svg?react";
-import PropertyCleanoutsIcon from "../assets/images/Home-Images/property-cleanouts.svg?react";
-import ApplianceRemovalIcon from "../assets/images/Home-Images/appliance-removal.svg?react";
-import WasteRemovalIcon from "../assets/images/Home-Images/waste-removal.svg?react";
-import FurnitureRemovalBg from "../assets/images/Home-Images/furniture-removal-bg.png";
-import PropertyCleanoutBg from "../assets/images/Home-Images/property-cleanouts-bg.png";
-import ApplianceRemovalBg from "../assets/images/Home-Images/appliance-removal-bg.png";
-import WasteRemovalBg from "../assets/images/Home-Images/waste-removal-bg.png";
+import { services } from "../data/ServicesData";
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 
 export default function Services() {
   gsap.registerPlugin(ScrollTrigger);
-
   useGSAP(() => {
     gsap.utils.toArray<HTMLElement>(".service").forEach((el, id) => {
       gsap.from(el, {
@@ -29,25 +22,6 @@ export default function Services() {
       });
     });
   });
-
-  const services = [
-    {
-      name: "Furniture Removal",
-      icon: FurnitureRemovalIcon,
-      bg: FurnitureRemovalBg,
-    },
-    {
-      name: "Property Cleanouts",
-      icon: PropertyCleanoutsIcon,
-      bg: PropertyCleanoutBg,
-    },
-    {
-      name: "Appliance Removal",
-      icon: ApplianceRemovalIcon,
-      bg: ApplianceRemovalBg,
-    },
-    { name: "Waste Removal", icon: WasteRemovalIcon, bg: WasteRemovalBg },
-  ];
 
   return (
     <Section className="  services flex flex-col justify-center gap-8 overflow-x-clip ">

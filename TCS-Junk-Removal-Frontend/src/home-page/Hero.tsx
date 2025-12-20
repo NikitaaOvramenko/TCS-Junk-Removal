@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
+import BookButton from "../components/BookButton";
 
 export default function Hero() {
   const headerRef = useRef<HTMLParagraphElement>(null);
@@ -30,7 +31,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <Section className=" Hero relative flex flex-col gap-4 bg-black bg-gradient-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80% overflow-hidden">
+    <Section className=" Hero relative flex flex-col  gap-4  bg-linear-to-r from-[#38AC43] from-30% to-[#2D6B33] to-80% overflow-hidden">
       {/* Background-stuff */}
       <img
         src={HeroBackground}
@@ -96,10 +97,10 @@ export default function Hero() {
           gap-12
           h-3/12 
           w-full 
-          pb-8
+          
         "
         >
-          <button
+          {/* <button
             className="
             bg-[#16C834]
             text-white 
@@ -116,7 +117,24 @@ export default function Hero() {
           "
           >
             Book Removal
-          </button>
+          </button> */}
+
+          <BookButton
+            className="
+            bg-[#16C834]
+            text-white 
+            font-bold 
+            rounded-xl  
+            text-xl sm:text-2xl
+            px-10 sm:px-12 
+            py-4 sm:py-5 
+            w-[80%] sm:w-auto
+            shadow-[0_6px_0_#0C8A23]
+            hover:translate-y-[2px] 
+            hover:shadow-[0_4px_0_#0C8A23]
+            transition-all
+          "
+          ></BookButton>
 
           <button
             className="
