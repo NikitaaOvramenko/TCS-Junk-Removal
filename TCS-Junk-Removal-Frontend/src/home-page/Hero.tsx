@@ -6,9 +6,11 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 import BookButton from "../components/BookButton";
+import { useLocation } from "../context/LocationContext";
 
 export default function Hero() {
   const headerRef = useRef<HTMLParagraphElement>(null);
+  const { location } = useLocation();
 
   gsap.registerPlugin(ScrollTrigger);
   useGSAP(() => {
@@ -58,7 +60,7 @@ export default function Hero() {
           >
             Junk Removal In{" "}
             <span className="bg-gradient-to-r from-[#C5FFEC] to-[#00FF00] bg-clip-text text-transparent">
-              Toronto & GTA
+              {location?.name}
             </span>
           </p>
         </div>

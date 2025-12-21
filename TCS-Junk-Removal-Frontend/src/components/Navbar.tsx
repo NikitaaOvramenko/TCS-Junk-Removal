@@ -4,11 +4,13 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useRef } from "react";
+import { useLocation } from "../context/LocationContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function NavBar() {
   const navbarRef = useRef<HTMLHeadElement>(null);
+  const { location } = useLocation();
 
   useGSAP(() => {
     gsap.set(navbarRef.current, {
@@ -41,7 +43,10 @@ export default function NavBar() {
       className=" fixed top-0 left-0 w-full h-[70px] bg-white shadow-md z-50"
     >
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
-        <Link to={"/"} className="flex items-center gap-3 sm:gap-4">
+        <Link
+          to={`/${location?.slug}`}
+          className="flex items-center gap-3 sm:gap-4"
+        >
           <Logo className="w-[45px] h-[45px] sm:w-[60px] sm:h-[60px]" />
 
           <p
