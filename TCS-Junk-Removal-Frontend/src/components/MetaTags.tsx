@@ -6,7 +6,7 @@ export default function MetaTags() {
   const { pathname } = useRouterLocation();
 
   const domain = "https://tcs-junk-removal.vercel.app";
-
+  //
   const cleanPath = pathname === "/" ? "" : pathname.replace(/\/$/, "");
   const canonicalUrl = `${domain}${cleanPath}`;
 
