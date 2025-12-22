@@ -1,5 +1,6 @@
 import { useId, useState } from "react";
 import Section from "../components/Section";
+import { useLocation } from "../context/LocationContext";
 
 type FaqItem = {
   id: string;
@@ -7,34 +8,34 @@ type FaqItem = {
   answer: string;
 };
 
-const FAQ_ITEMS: FaqItem[] = [
-  {
-    id: "pricing",
-    question: "How much does junk removal cost?",
-    answer:
-      "Pricing depends on volume and item type. We provide an upfront quote before we start—no hidden fees.",
-  },
-  {
-    id: "items",
-    question: "What items do you take?",
-    answer:
-      "We remove most household and commercial junk including furniture, appliances, bags of clutter, and more. If you’re unsure about an item, ask and we’ll confirm.",
-  },
-  {
-    id: "timing",
-    question: "Do you offer same-day service?",
-    answer:
-      "Yes—same-day and next-day service is often available in Toronto & the GTA depending on schedule.",
-  },
-  {
-    id: "prep",
-    question: "Do I need to move items outside first?",
-    answer:
-      "No. Our team handles the lifting and loading. Just point to what you want removed and we’ll take it from there.",
-  },
-];
-
 export default function FAQ() {
+  const { location } = useLocation();
+
+  const FAQ_ITEMS: FaqItem[] = [
+    {
+      id: "pricing",
+      question: "How much does junk removal cost?",
+      answer:
+        "Pricing depends on volume and item type. We provide an upfront quote before we start—no hidden fees.",
+    },
+    {
+      id: "items",
+      question: "What items do you take?",
+      answer:
+        "We remove most household and commercial junk including furniture, appliances, bags of clutter, and more. If you’re unsure about an item, ask and we’ll confirm.",
+    },
+    {
+      id: "timing",
+      question: "Do you offer same-day service?",
+      answer: `Yes—same-day and next-day service is often available in ${location?.name} depending on schedule.`,
+    },
+    {
+      id: "prep",
+      question: "Do I need to move items outside first?",
+      answer:
+        "No. Our team handles the lifting and loading. Just point to what you want removed and we’ll take it from there.",
+    },
+  ];
   const reactId = useId();
   const [openId, setOpenId] = useState<string | null>(FAQ_ITEMS[0]?.id ?? null);
 

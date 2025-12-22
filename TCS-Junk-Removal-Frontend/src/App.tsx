@@ -1,26 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import NavBar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import RequestPage from "./pages/RequestPage";
 import LocationContextProvider from "./context/LocationProvider";
-import { useLocation } from "./context/LocationContext";
-
-function MetaTags() {
-  const { location } = useLocation();
-
-  return (
-    <Helmet>
-      <title>{location?.meta.title ?? "YourLocalJunkRemoval"}</title>
-      <meta
-        name="description"
-        content={location?.meta.description ?? "Fast junk removal services"}
-      />
-    </Helmet>
-  );
-}
+import MetaTags from "./components/MetaTags";
 
 function App() {
   return (

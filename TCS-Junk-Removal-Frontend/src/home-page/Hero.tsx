@@ -43,8 +43,6 @@ export default function Hero() {
 
       <div className="filter absolute w-full h-full bg-black opacity-70"></div>
 
-      {/* Content-stuff */}
-
       <div className="content relative z-20 flex flex-col gap-10 w-full h-full">
         <div className="part1 flex w-full h-3/12 justify-center items-end px-4 text-center">
           <p
@@ -71,9 +69,10 @@ export default function Hero() {
             <p className="  text-[clamp(0.85rem,1.5vw,2rem)]  leading-[180%]">
               We make getting rid of unwanted items fast and stress-free. From
               old furniture to household clutter, our team handles all the
-              lifting and disposal for you. Serving Toronto & the GTA with
-              same-day service and fair, upfront pricing. Clear your space the
-              easy way — book your removal today.
+              lifting and disposal for you. Serving{" "}
+              <span>{location?.name}</span> with same-day service and fair,
+              upfront pricing. Clear your space the easy way — book your removal
+              today.
             </p>
           </div>
 
@@ -102,25 +101,6 @@ export default function Hero() {
           
         "
         >
-          {/* <button
-            className="
-            bg-[#16C834]
-            text-white 
-            font-bold 
-            rounded-xl  
-            text-xl sm:text-2xl
-            px-10 sm:px-12 
-            py-4 sm:py-5 
-            w-[80%] sm:w-auto
-            shadow-[0_6px_0_#0C8A23]
-            hover:translate-y-[2px] 
-            hover:shadow-[0_4px_0_#0C8A23]
-            transition-all
-          "
-          >
-            Book Removal
-          </button> */}
-
           <BookButton
             className="
             text-center
