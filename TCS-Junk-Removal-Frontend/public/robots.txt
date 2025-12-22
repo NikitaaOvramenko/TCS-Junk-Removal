@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tcs-junk-removal.vercel.app/sitemap.xml
+
