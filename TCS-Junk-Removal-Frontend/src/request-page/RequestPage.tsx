@@ -52,7 +52,7 @@ export default function RequestPage() {
     // Keep these keys in case the backend expects them.
     workType: "Junk Removal",
 
-    country: "CANADA",
+    country: "USA",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
