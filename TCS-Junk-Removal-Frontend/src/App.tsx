@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import RequestPage from "./pages/RequestPage";
 import LocationContextProvider from "./context/LocationProvider";
 import MetaTags from "./components/MetaTags";
+import { Navigate } from "react-router-dom";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <MetaTags />
         <NavBar />
         <Routes>
+          <Route path="/" element={<Navigate to={"/miami"} replace />} />
           <Route path="/:slug" element={<HomePage />} />
           <Route path="/book" element={<RequestPage />} />
         </Routes>
