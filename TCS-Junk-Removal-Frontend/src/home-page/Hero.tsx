@@ -136,7 +136,7 @@ export default function Hero() {
             transition-all
           "
           >
-            View Services
+            Call Us
           </button>
         </div>
       </div>

@@ -10,3 +10,4 @@ export function useCurrentLocation() {
 
   return allLocations.find((s) => s.slug === slug) || null;
 }
+
