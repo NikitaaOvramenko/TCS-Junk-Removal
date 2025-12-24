@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-sitemap": "ts-node scripts/generate-sitemap.ts"
+    "generate-sitemap": "npx tsx src/scripts/sitemapGenerator.ts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
