@@ -42,7 +42,9 @@ async function submitRequest(payload: FormState) {
     }),
   });
 
-  const data = (await res.json().catch(() => null)) as { message?: string } | null;
+  const data = (await res.json().catch(() => null)) as {
+    message?: string;
+  } | null;
 
   if (!res.ok) {
     return {
@@ -150,7 +152,7 @@ export default function RequestForm() {
               onChange={handleChange}
               disabled={isSubmitting}
             />
-
+            // TODO: Add location fields
             <LocationFields
               values={{
                 town: formData.town,
@@ -160,7 +162,6 @@ export default function RequestForm() {
               onChange={handleChange}
               disabled={isSubmitting}
             />
-
             <RequestDetails
               selectedServices={formData.selectedServices}
               onToggleService={handleServiceSelect}
