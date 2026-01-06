@@ -1,3 +1,4 @@
+// app/request/RequestForm.tsx
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -7,7 +8,7 @@ import LocationFields from "../components/request-components/LocationFields";
 import RequestDetails from "../components/request-components/RequestDetails";
 import { ScrollUp } from "../hooks/ScrollUp";
 
-interface FormData {
+type FormState = {
   name: string;
   lastname: string;
   email: string;
@@ -15,13 +16,11 @@ interface FormData {
   street: string;
   town: string;
   postal_code: string;
-  description: string;
   selectedServices: string[];
-  workType: string;
-  country: string;
-}
+  description: string;
+};
 
-const initialFormData: FormData = {
+const initialState: FormState = {
   name: "",
   lastname: "",
   email: "",
@@ -29,62 +28,44 @@ const initialFormData: FormData = {
   street: "",
   town: "",
   postal_code: "",
-  description: "",
   selectedServices: [],
-  // Keep these keys in case the backend expects them.
-  workType: "Junk Removal",
-  country: "CANADA",
+  description: "",
 };
+
+async function submitRequest(payload: FormState) {
+  const res = await fetch("/api/quote", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      ...payload,
+      service: payload.selectedServices.join(", "),
+    }),
+  });
+
+  const data = (await res.json().catch(() => null)) as { message?: string } | null;
+
+  if (!res.ok) {
+    return {
+      ok: false as const,
+      message:
+        data?.message ||
+        "Something went wrong while submitting your request. Please try again in a moment.",
+    };
+  }
+
+  return {
+    ok: true as const,
+    message: data?.message || "Request received! We’ll contact you shortly.",
+  };
+}
 
 export default function RequestForm() {
   ScrollUp();
 
-  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formData, setFormData] = useState<FormState>(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    setErrorMessage(null);
-    setIsSubmitting(true);
-
-    const payload = {
-      ...formData,
-      service: formData.selectedServices.join(", "),
-    };
-
-    try {
-      const res = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = (await res.json().catch(() => null)) as {
-        message?: string;
-      } | null;
-
-      if (!res.ok) {
-        throw new Error(
-          data?.message ||
-            "Something went wrong while submitting your request. Please try again in a moment."
-        );
-      }
-
-      setIsSuccess(true);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong while submitting your request. Please try again in a moment."
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -95,51 +76,51 @@ export default function RequestForm() {
 
   const handleServiceSelect = (serviceId: string) => {
     setFormData((prev) => {
-      const services = prev.selectedServices;
-
-      if (services.includes(serviceId)) {
-        return {
-          ...prev,
-          selectedServices: services.filter((id) => id !== serviceId),
-        };
-      }
-
-      return { ...prev, selectedServices: [...services, serviceId] };
+      const exists = prev.selectedServices.includes(serviceId);
+      return {
+        ...prev,
+        selectedServices: exists
+          ? prev.selectedServices.filter((id) => id !== serviceId)
+          : [...prev.selectedServices, serviceId],
+      };
     });
   };
 
-  if (isSuccess) {
-    return (
-      <main className="pt-[90px] pb-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto rounded-2xl border border-green-200 bg-green-50 p-8 text-center">
-            <div className="text-4xl mb-4">✅</div>
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-            <h3 className="text-2xl font-bold text-green-800 mb-2">
-              Request Received!
-            </h3>
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    setSuccessMessage(null);
 
-            <p className="text-green-700">
-              Thank you, {formData.name}. We’ve received your request and will
-              contact you shortly at {formData.phone}.
-            </p>
+    const result = await submitRequest({
+      name: formData.name.trim(),
+      lastname: formData.lastname.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      street: formData.street.trim(),
+      town: formData.town.trim(),
+      postal_code: formData.postal_code.trim(),
+      selectedServices: formData.selectedServices,
+      description: formData.description.trim(),
+    });
 
-            <button
-              type="button"
-              onClick={() => {
-                setIsSuccess(false);
-                setErrorMessage(null);
-                setFormData(initialFormData);
-              }}
-              className="mt-6 w-fit self-center bg-[#16C834] text-white font-bold rounded-xl px-6 py-3 shadow-[0_6px_0_#0C8A23] hover:translate-y-[2px] hover:shadow-[0_4px_0_#0C8A23] transition-all"
-            >
-              Submit another request
-            </button>
-          </div>
-        </div>
-      </main>
-    );
-  }
+    setIsSubmitting(false);
+
+    if (!result.ok) {
+      setErrorMessage(result.message);
+      return;
+    }
+
+    setSuccessMessage(result.message);
+    setFormData(initialState);
+  };
 
   return (
     <main className="pt-[90px] pb-16 bg-white">
@@ -184,11 +165,12 @@ export default function RequestForm() {
               selectedServices={formData.selectedServices}
               onToggleService={handleServiceSelect}
               description={formData.description}
-              onDescriptionChange={handleChange}
+              onDescriptionChange={handleDescriptionChange}
               disabled={isSubmitting}
               isSubmitting={isSubmitting}
               canSubmit={!isSubmitting && formData.selectedServices.length > 0}
               errorMessage={errorMessage}
+              successMessage={successMessage}
             />
           </form>
         </div>

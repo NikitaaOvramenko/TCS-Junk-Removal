@@ -9,6 +9,7 @@ interface Props {
   isSubmitting: boolean;
   canSubmit: boolean;
   errorMessage?: string | null;
+  successMessage?: string | null;
 }
 
 const textAreaClassName =
@@ -24,6 +25,7 @@ export default function RequestDetails({
   isSubmitting,
   canSubmit,
   errorMessage,
+  successMessage,
 }: Props) {
   return (
     <section className="space-y-6">
@@ -55,6 +57,12 @@ export default function RequestDetails({
       {errorMessage ? (
         <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
           {errorMessage}
+        </div>
+      ) : null}
+
+      {successMessage ? (
+        <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+          {successMessage}
         </div>
       ) : null}
 
