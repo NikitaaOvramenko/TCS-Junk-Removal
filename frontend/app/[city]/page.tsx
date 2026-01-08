@@ -5,10 +5,22 @@ import WhyUs from "../components/home-components/WhyUs";
 import Gap from "../components/general/Gap";
 import { notFound } from "next/navigation";
 import { getLocationBySlug } from "../data/LocationData";
+import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: { city: string };
 };
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { city } = await params;
+  const location = getLocationBySlug(city);
+  if (!location) notFound();
+
+  return { title: location.meta.title, description: location.meta.description };
+}
 
 export default async function Home({ params }: Props) {
   const { city } = await params;

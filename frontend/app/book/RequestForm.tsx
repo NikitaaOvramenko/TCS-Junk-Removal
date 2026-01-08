@@ -152,7 +152,6 @@ export default function RequestForm() {
               onChange={handleChange}
               disabled={isSubmitting}
             />
-            // TODO: Add location fields
             <LocationFields
               values={{
                 town: formData.town,

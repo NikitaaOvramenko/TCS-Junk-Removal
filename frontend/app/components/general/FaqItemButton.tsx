@@ -1,22 +1,23 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId } from "react";
 
 type Props = {
   id: string;
   question: string;
   answer: string;
-  defaultOpen?: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
 };
 
 export default function FaqItemButton({
   id,
   question,
   answer,
-  defaultOpen = false,
+  isOpen,
+  onToggle,
 }: Props) {
   const reactId = useId();
-  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const buttonId = `${reactId}-faq-btn-${id}`;
   const panelId = `${reactId}-faq-panel-${id}`;
@@ -28,7 +29,7 @@ export default function FaqItemButton({
         type="button"
         aria-expanded={isOpen}
         aria-controls={panelId}
-        onClick={() => setIsOpen((v) => !v)}
+        onClick={onToggle}
         className="w-full text-left px-5 sm:px-6 py-5 flex items-center justify-between gap-4"
       >
         <span className="text-black font-semibold text-[clamp(1rem,1.5vw,1.25rem)]">

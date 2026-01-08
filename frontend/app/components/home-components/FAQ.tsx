@@ -1,5 +1,8 @@
+"use client";
+
 import Section from "../general/Section";
 import FaqItemButton from "../general/FaqItemButton";
+import { useState } from "react";
 
 type FaqItem = {
   id: string;
@@ -12,6 +15,7 @@ type Props = {
 };
 
 export default function FAQ({ locationName }: Props) {
+  const [openId, SetOpenId] = useState<string | null>("pricing");
   const FAQ_ITEMS: FaqItem[] = [
     {
       id: "pricing",
@@ -46,8 +50,15 @@ export default function FAQ({ locationName }: Props) {
         </h1>
 
         <div className="flex flex-col gap-4">
-          {FAQ_ITEMS.map((item, index) => (
-            <FaqItemButton key={item.id} {...item} defaultOpen={index === 0} />
+          {FAQ_ITEMS.map((item) => (
+            <FaqItemButton
+              key={item.id}
+              {...item}
+              isOpen={openId == item.id}
+              onToggle={() => {
+                SetOpenId((prev) => (prev === item.id ? null : item.id));
+              }}
+            />
           ))}
         </div>
       </div>
