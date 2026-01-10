@@ -19,7 +19,11 @@ export async function generateMetadata(
   const location = getLocationBySlug(city);
   if (!location) notFound();
 
-  return { title: location.meta.title, description: location.meta.description };
+  return {
+    title: location.meta.title,
+    description: location.meta.description,
+    alternates: { canonical: `${process.env.NEXT_HOST}${location.slug}` },
+  };
 }
 
 export default async function Home({ params }: Props) {

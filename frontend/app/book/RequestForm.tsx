@@ -7,6 +7,7 @@ import ContactFields from "../components/request-components/ContactFields";
 import LocationFields from "../components/request-components/LocationFields";
 import RequestDetails from "../components/request-components/RequestDetails";
 import { ScrollUp } from "../hooks/ScrollUp";
+import axios from "axios";
 
 type FormState = {
   name: string;
@@ -33,7 +34,7 @@ const initialState: FormState = {
 };
 
 async function submitRequest(payload: FormState) {
-  const res = await fetch("/api/quote", {
+  const res = await fetch(`${process.env.NEXT_BACK_API}/api/email/form`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
