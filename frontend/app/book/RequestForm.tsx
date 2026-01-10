@@ -34,7 +34,7 @@ const initialState: FormState = {
 };
 
 async function submitRequest(payload: FormState) {
-  const res = await fetch(`${process.env.NEXT_BACK_API}/api/email/form`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/email/form`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
