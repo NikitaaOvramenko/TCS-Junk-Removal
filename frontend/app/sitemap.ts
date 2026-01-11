@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     for(let i = 0; i < allLocations.length; i++){
         sitemapArray.push({
-             url: `${process.env.NEXT_HOST}${allLocations[i].slug}`,
+             url: `${process.env.NEXT_HOST}${allLocations[i].country}/${allLocations[i].region}/${allLocations[i].city}`,
 
       lastModified: new Date(),
 
