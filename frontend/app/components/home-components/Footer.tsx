@@ -16,10 +16,10 @@ export default function Footer() {
           <p className="font-medium">
             ✉️{" "}
             <a
-              href="mailto:info@tcsjunkremoval.com"
+              href="mailto:info@yourlocalservice.co"
               className="hover:underline"
             >
-              info@tcsjunkremoval.com
+              info@yourlocalservice.co
             </a>
           </p>
         </div>
