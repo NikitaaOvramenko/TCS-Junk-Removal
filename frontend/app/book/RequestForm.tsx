@@ -14,11 +14,13 @@ type FormState = {
   lastname: string;
   email: string;
   phone: string;
+  country: string;
   street: string;
   town: string;
   postal_code: string;
   selectedServices: string[];
   description: string;
+  workType: string;
 };
 
 const initialState: FormState = {
@@ -26,11 +28,13 @@ const initialState: FormState = {
   lastname: "",
   email: "",
   phone: "",
+  country: "USA",
   street: "",
   town: "",
   postal_code: "",
   selectedServices: [],
   description: "",
+  workType: "Junk Removal",
 };
 
 async function submitRequest(payload: FormState) {
@@ -101,10 +105,10 @@ export default function RequestForm() {
     setIsSubmitting(true);
     setErrorMessage(null);
     setSuccessMessage(null);
-
-    const result = await submitRequest({
+    console.log({
       name: formData.name.trim(),
       lastname: formData.lastname.trim(),
+      country: "USA",
       email: formData.email.trim(),
       phone: formData.phone.trim(),
       street: formData.street.trim(),
@@ -112,6 +116,21 @@ export default function RequestForm() {
       postal_code: formData.postal_code.trim(),
       selectedServices: formData.selectedServices,
       description: formData.description.trim(),
+      workType: formData.workType,
+    });
+
+    const result = await submitRequest({
+      name: formData.name.trim(),
+      lastname: formData.lastname.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      country: "USA",
+      street: formData.street.trim(),
+      town: formData.town.trim(),
+      postal_code: formData.postal_code.trim(),
+      selectedServices: formData.selectedServices,
+      description: formData.description.trim(),
+      workType: formData.workType,
     });
 
     setIsSubmitting(false);
