@@ -12,7 +12,7 @@ interface Props {
 }
 
 const inputClassName =
-  "w-full px-4 py-2 border border-gray-200 rounded-lg bg-white " +
+  "w-full text-black px-4 py-2 border border-gray-200 rounded-lg bg-white " +
   "focus:outline-none focus:ring-2 focus:ring-[#16C834] focus:border-[#16C834]";
 
 export default function ContactFields({ values, onChange, disabled }: Props) {
@@ -92,7 +92,7 @@ export default function ContactFields({ values, onChange, disabled }: Props) {
             value={values.phone}
             onChange={onChange}
             className={inputClassName}
-            placeholder="(555) 555-5555"
+            placeholder="ex: (555) 555-5555"
             disabled={disabled}
             required
           />

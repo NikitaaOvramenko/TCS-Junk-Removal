@@ -25,7 +25,7 @@ export default function Hero({ locationName }: Props) {
 
       <div className="content relative z-20 flex flex-col gap-10 w-full h-full">
         <div className="part1 flex w-full h-3/12 justify-center items-end px-4 text-center">
-          <p
+          <h1
             className="
             heroHeader
             font-extrabold 
@@ -40,7 +40,7 @@ export default function Hero({ locationName }: Props) {
             <span className="bg-gradient-to-r from-[#C5FFEC] to-[#00FF00] bg-clip-text text-transparent">
               {locationName}
             </span>
-          </p>
+          </h1>
         </div>
 
         <div className="part2 relative w-full flex flex-col-reverse lg:flex-row items-center justify-center gap-8 px-6 lg:px-16">

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface Props {
   values: {
     town: string;
@@ -11,10 +13,21 @@ interface Props {
 }
 
 const inputClassName =
-  "w-full px-4 py-2 border border-gray-200 rounded-lg bg-white " +
+  "w-full px-4 py-2 border text-black border-gray-200 rounded-lg bg-white " +
   "focus:outline-none focus:ring-2 focus:ring-[#16C834] focus:border-[#16C834]";
 
 export default function LocationFields({ values, onChange, disabled }: Props) {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const url = window.sessionStorage.getItem("loc");
+    console.log(url);
+    console.log(url?.split("/"));
+
+    if (url) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setUrl(url);
+    }
+  }, []);
   return (
     <section className="space-y-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -32,7 +45,11 @@ export default function LocationFields({ values, onChange, disabled }: Props) {
             value={values.town}
             onChange={onChange}
             className={inputClassName}
-            placeholder="Toronto"
+            placeholder={`ex: ${url
+              .split("/")[2]
+              ?.split("-")
+              .map((w) => w[0].toUpperCase() + w.slice(1))
+              .join(" ")}`}
             disabled={disabled}
           />
         </div>
@@ -51,7 +68,9 @@ export default function LocationFields({ values, onChange, disabled }: Props) {
             value={values.street}
             onChange={onChange}
             className={inputClassName}
-            placeholder="Street Address"
+            placeholder={`ex: ${
+              url.split("/")[0] == "us" ? "125 NE 9th St" : "Victoria Street"
+            }`}
             disabled={disabled}
           />
         </div>
@@ -71,7 +90,7 @@ export default function LocationFields({ values, onChange, disabled }: Props) {
           value={values.postal_code}
           onChange={onChange}
           className={"max-w-sm " + inputClassName}
-          placeholder="M5V 2T6"
+          placeholder={`ex: ${url.split("/")[0] == "us" ? "33305" : "M4J 9E5"}`}
           disabled={disabled}
         />
       </div>

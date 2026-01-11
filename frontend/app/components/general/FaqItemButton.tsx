@@ -23,7 +23,7 @@ export default function FaqItemButton({
   const panelId = `${reactId}-faq-panel-${id}`;
 
   return (
-    <div className="rounded-2xl border border-black/15 bg-black/5 backdrop-blur-sm overflow-hidden">
+    <div className="rounded-2xl border w-[80%] border-black/15 bg-black/5 backdrop-blur-sm overflow-hidden">
       <button
         id={buttonId}
         type="button"

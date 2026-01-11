@@ -34,9 +34,9 @@ export default function WhyUs() {
 
       <div className="content relative z-10 flex flex-col justify-center gap-8 overflow-x-clip px-4 md:px-8 h-full">
         <div className="part1 flex justify-center items-center h-[15%]">
-          <h1 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] from-18 to-[#51D488] to-45% bg-clip-text text-transparent text-center mt-4">
+          <h2 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] from-18 to-[#51D488] to-45% bg-clip-text text-transparent text-center mt-4">
             Why Us?
-          </h1>
+          </h2>
         </div>
 
         <div className="part2 flex flex-col justify-center h-[85%] w-full">

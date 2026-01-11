@@ -43,13 +43,13 @@ export default function FAQ({ locationName }: Props) {
   ];
 
   return (
-    <Section className="faq relative bg-white overflow-hidden px-4 md:px-8 py-10 md:py-14 min-h-dvh">
-      <div className="mx-auto w-full max-w-5xl flex flex-col gap-8">
-        <h1 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] to-[#51D488] bg-clip-text text-transparent text-center">
+    <Section className="faq relative flex flex-col   bg-white overflow-hidden px-4 md:px-8 py-10 md:py-14 min-h-dvh">
+      <div className="mx-auto w-full  flex flex-col gap-8">
+        <h2 className="font-LemonMilk text-[clamp(1.2rem,6vw,64px)] bg-gradient-to-r from-[#14D10B] to-[#51D488] bg-clip-text text-transparent text-center">
           FAQ
-        </h1>
+        </h2>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col items-center gap-4">
           {FAQ_ITEMS.map((item) => (
             <FaqItemButton
               key={item.id}
