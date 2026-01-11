@@ -5,73 +5,80 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { allLocations } from "../../data/LocationData";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function NavBar() {
-  const navbarRef = useRef<HTMLHeadElement>(null);
+  const navbarRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-  const [storedSlug, setStoredSlug] = useState<string | null>(null);
 
-  const slugFromPath = useMemo(() => {
-    const first = pathname?.split("/").filter(Boolean)[0];
-    return first ?? null;
-  }, [pathname]);
-
-  const isValidLocationSlug = useMemo(() => {
-    if (!slugFromPath) return false;
-    return allLocations.some((l) => l.slug === slugFromPath);
-  }, [slugFromPath]);
-
-  const homeSlug = useMemo(() => {
-    if (isValidLocationSlug && slugFromPath) return slugFromPath;
-    if (storedSlug) return storedSlug;
-    return allLocations[0]?.slug ?? "";
-  }, [isValidLocationSlug, slugFromPath, storedSlug]);
+  // This will be "us/fl/miami" (no leading slash)
+  const [storedLoc, setStoredLoc] = useState<string>("");
 
   useEffect(() => {
-    // sync sessionStorage slug for non-location routes (e.g. /request) to still link back
+    // Read storage once on mount
     try {
-      const existing = window.sessionStorage.getItem("slug");
-      if (existing && existing !== storedSlug) {
-        queueMicrotask(() => setStoredSlug(existing));
-      }
+      const saved = sessionStorage.getItem("loc");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      if (saved) setStoredLoc(saved);
+    } catch {}
+  }, []);
 
-      if (isValidLocationSlug && slugFromPath) {
-        window.sessionStorage.setItem("slug", slugFromPath);
-        if (slugFromPath !== storedSlug) {
-          queueMicrotask(() => setStoredSlug(slugFromPath));
-        }
-      }
-    } catch {
-      // ignore (storage not available)
-    }
-  }, [isValidLocationSlug, slugFromPath, storedSlug]);
+  useEffect(() => {
+    // Parse pathname
+    const parts = (pathname || "").split("/").filter(Boolean); // ["us","fl","miami", ...]
+    const has3 = parts.length >= 3;
+
+    if (!has3) return;
+
+    const country = parts[0]?.toLowerCase();
+    const region = parts[1]?.toLowerCase();
+    const city = parts[2]?.toLowerCase();
+
+    // Check if this is a real location
+    const exists = allLocations.some(
+      (l) => l.country === country && l.region === region && l.city === city
+    );
+
+    if (!exists) return;
+
+    const loc = `${country}/${region}/${city}`;
+
+    // Save to session storage + state
+    try {
+      sessionStorage.setItem("loc", loc);
+    } catch {}
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (loc !== storedLoc) setStoredLoc(loc);
+  }, [pathname, storedLoc]);
+
+  // Decide where the "home" logo should go
+  let homeHref = "/";
+  if (storedLoc) homeHref = `/${storedLoc}`;
+  else if (allLocations.length > 0) {
+    // fallback to first location if storage empty
+    homeHref = `/${allLocations[0].country}/${allLocations[0].region}/${allLocations[0].city}`;
+  }
+
+  // If your /book is NOT nested under /country/region/city, keep "/book"
+  // If you WANT book page to be location-specific, do: const bookHref = `${homeHref}/book`;
+  const bookHref = "/book";
 
   useGSAP(() => {
-    gsap.set(navbarRef.current, {
-      position: "fixed",
-      y: "0",
-    });
+    gsap.set(navbarRef.current, { position: "fixed", y: "0" });
 
     ScrollTrigger.create({
       start: 0,
       end: "max",
       onUpdate: (self) => {
-        if (self.direction === -1) {
-          gsap.to(navbarRef.current, {
-            y: 0,
-            duration: 0.5,
-          });
-        } else {
-          gsap.to(navbarRef.current, {
-            y: -100,
-            duration: 0.5,
-          });
-        }
+        gsap.to(navbarRef.current, {
+          y: self.direction === -1 ? 0 : -100,
+          duration: 0.5,
+        });
       },
     });
   }, []);
@@ -79,57 +86,26 @@ export default function NavBar() {
   return (
     <header
       ref={navbarRef}
-      className=" fixed top-0 left-0 w-full h-[70px] bg-white shadow-md z-50"
+      className="fixed top-0 left-0 w-full h-[70px] bg-white shadow-md z-50"
     >
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 flex items-center justify-between">
-        <Link
-          href={`/${homeSlug}`}
-          className="flex items-center gap-3 sm:gap-4"
-        >
+        <Link href={homeHref} className="flex items-center gap-3 sm:gap-4">
           <Image
             className="w-[45px] h-[45px] sm:w-[60px] sm:h-[60px]"
             src="/Modified_Logo.svg"
             alt="Logo"
             width={180}
             height={60}
+            priority
           />
-
-          <p
-            className="
-              text-black 
-              font-regular
-              leading-none
-              tracking-[9%]
-
-              
-
-            text-[clamp(0.85rem,2.2vw,1.2rem)]
-              
-            "
-          >
+          <p className="text-black font-regular leading-none tracking-[9%] text-[clamp(0.85rem,2.2vw,1.2rem)]">
             YourLocalJunkRemoval
           </p>
         </Link>
 
         <Link
-          href="/book"
-          className="
-            bg-green-500 
-            hover:bg-green-600 
-            transition 
-            text-white
-            font-semibold 
-            rounded-lg 
-            text-center 
-
-            py-1 
-            px-5 
-            text-sm
-
-            sm:py-[6px] 
-            sm:px-8 
-            sm:text-md
-          "
+          href={bookHref}
+          className="bg-green-500 hover:bg-green-600 transition text-white font-semibold rounded-lg text-center py-1 px-5 text-sm sm:py-[6px] sm:px-8 sm:text-md"
         >
           Book Online
         </Link>
